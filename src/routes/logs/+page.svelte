@@ -24,10 +24,10 @@
 
     async function searchLogs() {
         return await axios
-            .get(`https://raw.githubusercontent.com/jerthz/grzi.dev/main/posts/global_meta.json`)
+            .get(`https://raw.githubusercontent.com/suspistew/blog-data/main/posts/global_meta.json`)
             .then(function ({data}) {
                 logs = data;
-                let tmpLogs = logs.filter(l => !currentTagFilter || l.tag.replace(/\s+/g, '-').toLowerCase() === currentTagFilter);
+                let tmpLogs = logs.filter(l => !currentTagFilter || l.tags.some(t => t.replace(/\s+/g, '-').toLowerCase() === currentTagFilter));
                 currentPageLogs = tmpLogs.slice(
                     currentPage * pageSize,
                     (currentPage + 1) * pageSize
@@ -58,7 +58,7 @@
                 url.searchParams.delete("page");
             }
             window.history.pushState({}, "", url);
-            let tmpLogs = logs.filter(l => !currentTagFilter || l.tag.replace(/\s+/g, '-').toLowerCase() === currentTagFilter);
+            let tmpLogs = logs.filter(l => !currentTagFilter || l.tags.some(t=>t.replace(/\s+/g, '-').toLowerCase() === currentTagFilter));
             currentPageLogs = tmpLogs.slice(
                 currentPage * pageSize,
                 (currentPage + 1) * pageSize
@@ -110,7 +110,7 @@
                     <div class="article-flex">
                         <div class="article-img">
                             <div>
-                                <img src="https://avatars.githubusercontent.com/u/3636719?v=4" style="height: 160px;"/>
+                                <img src={m.miniature} style="height: 160px;"/>
                             </div>
                         </div>
                         <div style="width: 100%;">
@@ -122,7 +122,9 @@
                             <div class="article-description">{m.description}</div>
 
                             <div class={"article-tags"}>
-                                <div class={"tag tag-clickable " + m.tag.replace(/\s+/g, '-').toLowerCase()} on:click={selectTag(m.tag.replace(/\s+/g, '-').toLowerCase())}>{m.tag}</div>
+                                {#each m.tags as tag}
+                                    <div class={"tag tag-clickable " + tag.replace(/\s+/g, '-').toLowerCase()} on:click={selectTag(tag.replace(/\s+/g, '-').toLowerCase())}>{tag}</div>
+                                {/each}
                             </div>
                         </div>
                     </div>

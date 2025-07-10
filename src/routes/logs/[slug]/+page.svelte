@@ -27,7 +27,9 @@
     <div>
         <h3 class="title">Suspistew</h3>
         <div>
-            <a href="/">About</a> - <a href="/logs">Logs</a>
+            <a href="/">About</a>
+            - <a href="/projects">Projets</a>
+            - <a href="/logs">Logs</a>
         </div>
         <div class="log">
             <div class="log-title">

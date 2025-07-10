@@ -8,16 +8,15 @@
             <div class="title--description">Developper, Gamer, Rétro, Speedrunner</div>
         </div>
         <p class="description">
-            I am a passionate developer with a diverse skill set that spans multiple programming languages and
-            technologies. My expertise lies in Java, Rust, Svelte, and operations, allowing me to tackle a wide range of
-            projects and challenges. I enjoy to explore different business concepts and applications. I thrive on the
-            excitement of solving complex problems and
-            continuously learning new skills. In my spare time, I love developing video games as side projects.
-            Additionally, I have a deep interest in retro gaming and enjoy speedrunning various games.
+            Développeur, gamer, mes compétences vont de Java à Rust en passant par Svelte et l'ops, ce qui me permet de mener à bien une grande diversité de projets.
+            <br/><br/>
+            J'ai créé ce petit site pour tracer mes pensées, notamment sur le jeu vidéo ou sur mes projets. Aucune ambition particulière, juste avoir une sorte de journal de bord et vitrine pour moi même.
+            <br/><br/>
+            Pendant mon temps libre, je m'essaye à de nouvelles technos, je fais des game jams, j'adore la natation, je lis, j'écris, je joue aux jeux vidéo, récent ou rétro et je fais un peu de speedrun.
         </p>
         <div>
-            <a href="https://github.com/suspistew/" target="_blank">Github</a> 
-            - <a href="/logs">Logs</a>
+            <a href="/logs">Logs</a>
+            - <a href="/projects">Projets</a>
             - <a href="/stats">Stats</a>
         </div>
     </div>

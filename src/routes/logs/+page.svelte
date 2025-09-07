@@ -95,8 +95,8 @@
         </h3>
         <div>
             <a href="/">About</a>
-            - <a href="/projects">Projets</a>
-            - <a href="/stats">Stats</a>
+            - <a href="/drawings">Dessins</a>
+            - <a href="/gaming-logs">Gaming logs</a>
         </div>
 
         {#if currentTagFilter}
@@ -242,20 +242,6 @@
 
     .article-title a:hover {
         color: #222299;
-    }
-
-    .article-tags {
-        width: 100%;
-        margin-top: 10px;
-        font-size: 12px;
-        font-weight: 200;
-    }
-
-    .tag {
-        border: 1px solid #444;
-        display: inline-block;
-        padding: 6px;
-        border-radius: 4px;
     }
 
     .tag-clickable:hover{

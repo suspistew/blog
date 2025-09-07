@@ -3,13 +3,17 @@
 </script>
 <div class="home">
     <div>
-        <div class="title">
-            <div class="title--name">Suspistew</div>
-            <div class="title--description">Admin console</div>
-        </div>
+        <h3 class="title">
+            Suspistew - dessins
+        </h3>
         <div>
-            à gauche : listing articles
-            à droite : listing stats
+            <a href="/">About</a>
+            - <a href="/logs">Logs</a>
+            - <a href="/gaming-logs">Gaming logs</a>
+        </div>
+        <div class="description-page">
+            Depuis début aout 2025 j'apprend le dessin, et plus particulièrement le dessin manga.
+            Voici dans l'ordre décroissant, mes dessins réalisés.
         </div>
     </div>
 </div>
@@ -18,28 +22,19 @@
 
     .home {
         height: 100%;
-        width: 500px;
+        width: 850px;
         margin: auto;
         font-weight: 200;
         font-size: 16px;
         display: flex;
         flex-direction: row;
-        vertical-align: center;
-        align-items: center;
-        justify-content: center;
-        text-align: left;
     }
 
     .home div {
         width: 100%;
     }
 
-    .title--name {
-        font-weight: 500;
-        font-size: 15px;
-    }
-
-    .title--description {
-        font-weight: 100;
+    .description-page{
+        margin-top:2rem;
     }
 </style>

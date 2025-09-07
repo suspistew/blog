@@ -16,8 +16,8 @@
         </p>
         <div>
             <a href="/logs">Logs</a>
-            - <a href="/projects">Projets</a>
-            - <a href="/stats">Stats</a>
+            - <a href="/drawings">Dessins</a>
+            - <a href="/gaming-logs">Gaming logs</a>
         </div>
     </div>
 </div>

@@ -7,6 +7,10 @@
             <div class="title--name">Suspistew</div>
             <div class="title--description">Admin console</div>
         </div>
+        <div>
+            à gauche : listing articles
+            à droite : listing stats
+        </div>
     </div>
 </div>
 

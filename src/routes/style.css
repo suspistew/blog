@@ -1,13 +1,12 @@
-html, body{
+html, body {
     margin: 0;
     padding: 0;
     background: #f0f0f0;
     font-family: "Chivo Mono", monospace;
     font-optical-sizing: auto;
     font-style: normal;
-    height:100%;
+    height: 100%;
 }
-
 
 .log-content {
 }
@@ -40,11 +39,11 @@ html, body{
     width: 100%;
 }
 
-.log-content p img{
+.log-content p img {
     width: 100%;
 }
 
-.log-content ul{
+.log-content ul {
     text-align: left;
     width: 100%;
     word-wrap: break-word;
@@ -65,7 +64,7 @@ html, body{
     border: 2px solid #A2A2A2;
 }
 
-.log-content{
+.log-content {
     margin-bottom: 25px;
 }
 
@@ -86,4 +85,57 @@ b, strong {
 .vidéo-game, .video-game {
     background: #467fab;
     color: white;
+}
+
+.nintendo-switch {
+    background: #E60012;
+    color: white;
+}
+
+.nintendo-switch2{
+    background: #d32d26;
+    color:white;
+}
+.ps5 {
+    background: white;
+    color: black;
+}
+
+
+.article-tags {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 200;
+}
+
+.tag {
+    border: 1px solid #444;
+    display: inline-block;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+.tiny-tag {
+    font-size: 0.9rem;
+    padding: 0.1rem 0.4rem;
+    width: fit-content;
+}
+
+.tag-flex {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.tag img {
+    height: 30px;
+    width: auto;
+}
+
+.tag-clickable:hover{
+    cursor: pointer;
+    opacity: 0.8;
 }

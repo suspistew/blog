@@ -28,8 +28,9 @@
         <h3 class="title">Suspistew</h3>
         <div>
             <a href="/">About</a>
-            - <a href="/projects">Projets</a>
+            - <a href="/drawings">Dessins</a>
             - <a href="/logs">Logs</a>
+            - <a href="/gaming-logs">Gaming logs</a>
         </div>
         <div class="log">
             <div class="log-title">
@@ -115,8 +116,5 @@
         text-decoration: none;
     }
 
-    .tag-clickable:hover{
-        cursor: pointer;
-        opacity: 0.8;
-    }
+
 </style>

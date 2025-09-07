@@ -132,7 +132,7 @@
             {/each}
         </div>
         <nav style="text-align: center; margin-top: 2em;padding-bottom:20px;">
-            {#if totalPages > 1}
+            {#if totalPages > 0}
                 <button
                         on:click={() => goToPage(currentPage - 1)}
                         disabled={currentPage === 0}

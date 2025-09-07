@@ -26,17 +26,18 @@ html, body {
 }
 
 .log-content h2 {
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .log-content h1 {
-    font-weight: 400;
+    font-weight: 800;
 }
 
 .log-content p {
     margin-top: 20px;
     margin-bottom: 20px;
     width: 100%;
+    font-size: 0.9rem;
 }
 
 .log-content p img {
@@ -92,7 +93,7 @@ b, strong {
     color: white;
 }
 
-.nintendo-switch2{
+.nintendo-switch-2{
     background: #d32d26;
     color:white;
 }
@@ -117,8 +118,8 @@ b, strong {
 }
 
 .tiny-tag {
-    font-size: 0.9rem;
-    padding: 0.1rem 0.4rem;
+    font-size: 12px;
+    padding: 0.3rem 0.7rem;
     width: fit-content;
 }
 
@@ -138,4 +139,31 @@ b, strong {
 .tag-clickable:hover{
     cursor: pointer;
     opacity: 0.8;
+}
+
+.snes {
+    background: #d02c24;
+    color: white;
+}
+
+.ps5{
+    background : #665cbe;
+    color: white;
+}
+.ps2{
+    background : #006FCD;
+    color: white;
+}
+.nes{
+    background : #fe0016;
+    color: white;
+}
+
+.pc{
+    background: #222;
+    color: white;
+}
+
+code {
+    font-weight: 800;
 }

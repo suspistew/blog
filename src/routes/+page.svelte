@@ -4,7 +4,7 @@
     import {onMount} from "svelte";
     import RatingStars from "../components/RatingStars.svelte";
     import Loader from "../components/Loader.svelte";
-    import {afterNavigate} from "$app/navigation";
+    import {afterNavigate, goto} from "$app/navigation";
 
     let logs = [];
     let mainlog = [];
@@ -15,6 +15,8 @@
     let currentTagFilter = "";
     let totalElements = 0;
     let trigger;
+
+    const toPage = (n, t) => goto(`/?page=${n}&tag=${t}`);
 
     function initPageFromURL() {
         const params = new URLSearchParams(window.location.search);
@@ -73,10 +75,7 @@
             currentPage = page;
             const url = new URL(window.location);
             url.searchParams.set("page", page + 1);
-            if ((page + 1) === 1) {
-                url.searchParams.delete("page");
-            }
-            window.history.pushState({}, "", url);
+            toPage(page + 1, currentTagFilter);
             let tmpLogs = logs
                 .filter((l, i) => i !== 0)
                 .filter(l => !currentTagFilter || l.tags.some(t => t.replace(/\s+/g, '-').toLowerCase() === currentTagFilter));
@@ -121,7 +120,7 @@
 
 <svelte:head>
     <title>Daron Quest - Accueil</title>
-    <meta name="description" content="Journal de bord d'un daron passionné par les jeux vidéo."/>
+    <meta name="description" content="Journal de bord d'un daron passionné"/>
 </svelte:head>
 
 <div class="home">
@@ -142,9 +141,11 @@
                         <div class="last-test-descr">
                             <div class="last-test-title">{mainlog.title}</div>
                             <div class="last-test-description">{mainlog.description}</div>
-                            <div class="rating">
-                                <RatingStars value={mainlog.note} size={24}/>
-                            </div>
+                            {#if mainlog.note}
+                                <div class="rating">
+                                    <RatingStars value={mainlog.note} size={24}/>
+                                </div>
+                            {/if}
                         </div>
                     </div>
                 </a>
@@ -228,7 +229,7 @@
                 Dossiers récents
             {/if}
             {#if currentPage !== 0}
-                 (Page {currentPage+1})
+                (Page {currentPage + 1})
             {/if}
         </h2>
     </div>
@@ -251,7 +252,9 @@
                             <div class="article-description">{@html m.description}</div>
 
                             <div class="note rating">
-                                <RatingStars value={m.note} size={24}/>
+                                {#if m.note}
+                                    <RatingStars value={m.note} size={24}/>
+                                {/if}
                             </div>
 
 
@@ -266,7 +269,7 @@
                     </div>
                 </a>
             {:else}
-                <div class="article">
+                <div class="disabledarticle" title="Pas d'article détaillé">
                     <div class="article-flex">
                         <div class="article-img">
                             <div>
@@ -282,7 +285,9 @@
                             <div class="article-description">{@html m.description}</div>
 
                             <div class="note rating">
-                                <RatingStars value={m.note} size={24}/>
+                                {#if m.note}
+                                    <RatingStars value={m.note} size={24}/>
+                                {/if}
                             </div>
 
                             <div class={"article-tags"}>
@@ -290,6 +295,7 @@
                                     <div class={"tag tag-clickable " + tag.replace(/\s+/g, '-').toLowerCase()}
                                          on:click={selectTag(tag.replace(/\s+/g, '-').toLowerCase())}>{tag}</div>
                                 {/each}
+                                <div class={"tag articletag"}>Note uniquement</div>
                             </div>
                         </div>
                     </div>
@@ -343,6 +349,7 @@
 
 <style>
     .note {
+        height: 3rem;
         margin: 1rem 0 1rem 0;
     }
 
@@ -390,14 +397,14 @@
         color: #121212;
     }
 
-    .article {
+    .article, .disabledarticle {
         background: #ebddcd;
         border-radius: 0.5rem;
         border: 1px solid #a48875;
     }
 
     @media (max-width: 1024px) {
-        .article {
+        .article, .disabledarticle {
             flex: 1 1 calc(50% - 2rem);
             max-width: calc(50%);
         }
@@ -408,20 +415,20 @@
             display: none;
         }
 
-        .article {
+        .article, .disabledarticle {
             flex: 1 1 calc(100%);
             max-width: calc(100%);
         }
     }
 
     @media (min-width: 1024px) {
-        .article {
+        .article, .disabledarticle {
             flex: 0 0 calc(33.333% - 2rem); /* largeur fixe = 1/3 */
             max-width: calc(33.333%);
         }
     }
 
-    .article img {
+    .article img, .disabledarticle img {
         width: 100%;
         height: auto;
         border-top-right-radius: 0.5rem;
@@ -458,6 +465,9 @@
     .article:hover {
         background: #d5c1ac;
         cursor: pointer;
+    }
+    .disabledarticle:hover{
+        cursor: not-allowed;
     }
 
     .article:hover img {
@@ -611,4 +621,6 @@
         background: #bba18c;
         cursor: pointer;
     }
+
+
 </style>

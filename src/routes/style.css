@@ -45,8 +45,21 @@ html, body {
     line-height: 1.35rem;
 }
 
+.log-content ul, .log-content ul li{
+    font-family: "Inter", monospace;
+    width: 100%;
+    font-size: 0.9rem;
+    text-align: justify;
+    font-weight: 300;
+    line-height: 1.35rem;
+}
+
 @media (max-width: 1024px) {
     .log-content p {
+        font-size: 1.1rem;
+        line-height: 1.5rem;
+    }
+    .log-content ul, .log-content ul li{
         font-size: 1.1rem;
         line-height: 1.5rem;
     }

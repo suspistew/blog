@@ -57,11 +57,12 @@
                 <div class="log-content">
                     {@html logContent}
                 </div>
-
-                <div class="log-note">
-                    <h3>Note</h3>
-                    <RatingStars value={log.note}/>
-                </div>
+                {#if log.note}
+                    <div class="log-note">
+                        <h3>Note</h3>
+                        <RatingStars value={log.note}/>
+                    </div>
+                {/if}
                 {#if log.gallery && log.gallery.length > 0}
                     <div class="log-gallery">
                         <h3>Gallerie d'images</h3>
@@ -70,7 +71,7 @@
                 {/if}
 
                 <div class="goback">
-                <a href="/"  class="buttonreturn">Revenir en arrière</a>
+                    <a href="/" class="buttonreturn">Revenir en arrière</a>
                 </div>
             </div>
         </div>
@@ -78,11 +79,12 @@
 </div>
 
 <style>
-    .goback{
+    .goback {
         text-align: right;
         font-size: 0.9rem;
         margin-top: 1rem;
     }
+
     .title {
         font-weight: 500;
     }
@@ -148,7 +150,7 @@
         font-size: 14px;
     }
 
-    .log-date div{
+    .log-date div {
         margin-top: 8px;
         font-weight: 400;
     }
@@ -165,7 +167,7 @@
         text-decoration: none;
     }
 
-    .buttonreturn{
+    .buttonreturn {
         background: #ebddcd;
         border: 1px solid #a48875;
         border-radius: 0.3rem;
@@ -175,11 +177,13 @@
         color: black;
         padding: 0.5rem;
     }
-    .buttonreturn:hover{
+
+    .buttonreturn:hover {
         background: #d5c1ac;
         cursor: pointer;
     }
-    .buttonreturn:active{
+
+    .buttonreturn:active {
         background: #bba18c;
         cursor: pointer;
     }

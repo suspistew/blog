@@ -3,15 +3,21 @@
     import {onMount} from "svelte";
     import {beforeNavigate} from "$app/navigation";
 
-    let show = true;
+    const { onRegister = () => {} } = $props();
+    let show = $state(true);
+
+    function fire(timeout = 1000) {
+        show = true;
+        setTimeout(() => (show = false), timeout);
+    }
+
+    $effect.root(() => {
+        onRegister(fire);
+    });
     onMount(async () => {
         setTimeout(() => { show = false; }, 1000);
     });
-    beforeNavigate((nav) => {
-        if (nav.type === 'link' && nav.to?.url.pathname.endsWith('/..')) return; // adapte ton test
-        show = true;
-        setTimeout(() => { show = false; }, 1000);
-    });
+    beforeNavigate(() => fire(1000));
 </script>
 
 <style>

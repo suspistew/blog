@@ -17,7 +17,7 @@
 
 <style>
     .rating { display:inline-flex; gap:2px; line-height:0; }
-    .empty { color: var(--star-empty, #d6d6d6); }
+    .empty { color: var(--star-empty, #efefef); }
     .full  { color: var(--star-full,  #f5a623); }
     svg { width: var(--size); height: var(--size); display:block; }
     :host { --size:24px; }
@@ -32,9 +32,9 @@
                 </clipPath>
             </defs>
 
-            <path class="empty" fill="none" stroke="currentColor" stroke-width="1.5"
+            <path class="empty" fill="currentColor" stroke="black" stroke-width="1.5"
                   d="M12 3.6l2.7 5.46 6.03.88-4.37 4.26 1.03 6.01L12 17.77 6.61 20.21l1.03-6.01L3.27 9.94l6.03-.88L12 3.6z"/>
-            <path class="full" fill="currentColor" clip-path={`url(#clip-${uid}-${i})`}
+            <path class="full" fill="currentColor"  stroke="black" stroke-width="1.5" clip-path={`url(#clip-${uid}-${i})`}
                   d="M12 3.6l2.7 5.46 6.03.88-4.37 4.26 1.03 6.01L12 17.77 6.61 20.21l1.03-6.01L3.27 9.94l6.03-.88L12 3.6z"/>
         </svg>
     {/each}

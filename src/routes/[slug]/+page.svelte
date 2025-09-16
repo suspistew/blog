@@ -2,9 +2,10 @@
     import axios from "axios";
     import {onMount} from "svelte";
     import {page} from '$app/stores';
-    import RatingStars from "../../../components/RatingStars.svelte";
-    import Carousel from "../../../components/Carousel.svelte";
+    import RatingStars from "../../components/RatingStars.svelte";
+    import Carousel from "../../components/Carousel.svelte";
 
+    let pageTitle = "Daron Quest"
     let log = {
         date: "Loading",
         title: "Loading",
@@ -20,21 +21,21 @@
         log = json.data;
         const html = await axios.get("https://raw.githubusercontent.com/suspistew/blog-data/refs/heads/main/gaming/src/" + $page.params.slug + "/gaming-post.html");
         logContent = html.data;
+        pageTitle = "Daron Quest - " + log.title;
     }
 
     onMount(async () => {
         await getLog();
     });
 </script>
+
+<svelte:head>
+    <title>{pageTitle}</title>
+    <meta name="description" content={log.description}/>
+</svelte:head>
+
 <div class="home">
     <div style="width:100%;">
-        <h3 class="title">Suspistew</h3>
-        <div>
-            <a href="/">About</a>
-            - <a href="/drawings">Dessins</a>
-            - <a href="/logs">Logs</a>
-            - <a href="/gaming-logs">Gaming logs</a>
-        </div>
         <div class="log">
             <img src={log.full}/>
             <div class="log-fill">
@@ -45,7 +46,7 @@
                 </div>
                 <div class="log-date">
                     {#each log.tags as tag}
-                        <a href={"/gaming-logs?tag=" + tag.replace(/\s+/g, '-').toLowerCase()}
+                        <a href={"/?tag=" + tag.replace(/\s+/g, '-').toLowerCase()}
                            class={"tag tag-clickable " + tag.replace(/\s+/g, '-').toLowerCase()}
                            on:click={selectTag(tag.replace(/\s+/g, '-').toLowerCase())}>{tag}</a>
                     {/each}
@@ -61,7 +62,7 @@
                     <h3>Note</h3>
                     <RatingStars value={log.note}/>
                 </div>
-                {#if log.gallery}
+                {#if log.gallery && log.gallery.length > 0}
                     <div class="log-gallery">
                         <h3>Gallerie d'images</h3>
                         <Carousel images={log.gallery}/>
@@ -69,7 +70,7 @@
                 {/if}
 
                 <div class="goback">
-                <a href="/gaming-logs">Voir tous les tests de jeux</a>
+                <a href="/"  class="buttonreturn">Revenir en arrière</a>
                 </div>
             </div>
         </div>
@@ -88,7 +89,7 @@
 
     .home {
         height: 100%;
-        width: 850px;
+        width: 1024px;
         margin: auto;
         font-weight: 200;
         font-size: 16px;
@@ -98,7 +99,7 @@
 
     @media (max-width: 1024px) {
         .home {
-            width: 90%;
+            width: 95%;
             margin: auto;
         }
     }
@@ -108,9 +109,10 @@
         display: flex;
         flex-direction: column;
         gap: 15px;
-        background: white;
+        background: #f3ebe5;
         border: 1px solid #555;
         border-radius: 0.4rem;
+        font-weight: 400;
     }
 
     .log img {
@@ -127,23 +129,28 @@
 
     .log-title {
         font-weight: 700;
-        font-size: 24px;
+        font-size: 32px;
         text-align: center;
-        text-transform: uppercase;
-        margin-bottom: 1rem;
+        text-transform: capitalize;
+        margin-bottom: 0.5rem;
     }
 
     .log-title-separator {
         width: 50%;
-        margin: 0.2rem auto 1.4rem auto;
+        margin: 0 auto 1.4rem auto;
         height: 1px;
-        border-bottom: 1px dashed #666;
+        border-bottom: 1px solid #a48875;
     }
 
     .log-date {
         text-align: center;
-        font-weight: 100;
-        font-size: 12px;
+        font-weight: 200;
+        font-size: 14px;
+    }
+
+    .log-date div{
+        margin-top: 8px;
+        font-weight: 400;
     }
 
     .tag {
@@ -156,6 +163,25 @@
 
     a {
         text-decoration: none;
+    }
+
+    .buttonreturn{
+        background: #ebddcd;
+        border: 1px solid #a48875;
+        border-radius: 0.3rem;
+        font-size: 0.8rem;
+        font-family: "Inter", monospace;
+        font-weight: 400;
+        color: black;
+        padding: 0.5rem;
+    }
+    .buttonreturn:hover{
+        background: #d5c1ac;
+        cursor: pointer;
+    }
+    .buttonreturn:active{
+        background: #bba18c;
+        cursor: pointer;
     }
 
 </style>

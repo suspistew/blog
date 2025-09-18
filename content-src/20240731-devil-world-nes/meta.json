@@ -1,0 +1,15 @@
+{
+  "title": "Devil world (NES)",
+  "description": "<code>Devil world</code> Un jeu vidéo de Shigeru Miyamoto, mais sans Mario ou donkey kong.",
+  "tags": ["nes"],
+  "date": "2024-07-31",
+  "miniature": "https://daronquest.fr/miniatures/devil_world.jpg",
+  "full": "https://daronquest.fr/galleries/devil_world_nes/1.png",
+  "gallery":[
+    "https://daronquest.fr/galleries/devil_world_nes/1.png",
+    "https://daronquest.fr/galleries/devil_world_nes/2.png",
+    "https://daronquest.fr/galleries/devil_world_nes/3.png"
+  ],
+  "published": true,
+  "note": 4
+}

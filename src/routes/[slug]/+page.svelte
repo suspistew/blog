@@ -1,37 +1,31 @@
 <script>
-    import axios from "axios";
-    import {onMount} from "svelte";
-    import {page} from '$app/stores';
     import RatingStars from "../../components/RatingStars.svelte";
     import Carousel from "../../components/Carousel.svelte";
 
-    let pageTitle = "Daron Quest"
-    let log = {
-        date: "Loading",
-        title: "Loading",
-        description: "Loading",
-        url: "Loading",
-        gallery: []
-    };
-
-    let logContent = "";
-
-    async function getLog() {
-        const json = await axios.get("https://raw.githubusercontent.com/suspistew/blog-data/refs/heads/main/gaming/src/" + $page.params.slug + "/meta.json");
-        log = json.data;
-        const html = await axios.get("https://raw.githubusercontent.com/suspistew/blog-data/refs/heads/main/gaming/src/" + $page.params.slug + "/gaming-post.html");
-        logContent = html.data;
-        pageTitle = "Daron Quest - " + log.title;
-    }
-
-    onMount(async () => {
-        await getLog();
-    });
+    export let data;
+    const { log, logContent, meta } = data;
+    const mois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+    const formatDate = d => { const [y,m,day]=d.split("-").map(Number); return `${day} ${mois[m-1]} ${y}`; };
 </script>
 
 <svelte:head>
-    <title>{pageTitle}</title>
-    <meta name="description" content={log.description}/>
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <link rel="canonical" href={meta.url} />
+
+    <meta property="og:type" content={meta.type} />
+    <meta property="og:site_name" content="Daron Quest" />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:image" content={meta.image} />
+    <meta property="og:url" content={meta.url} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={meta.title} />
+    <meta name="twitter:description" content={meta.description} />
+    <meta name="twitter:image" content={meta.image} />
+    <meta property="og:image:width" content="480">
+    <meta property="og:image:height" content="270">
 </svelte:head>
 
 <div class="home">
@@ -51,7 +45,7 @@
                            on:click={selectTag(tag.replace(/\s+/g, '-').toLowerCase())}>{tag}</a>
                     {/each}
                     <div>
-                        {log.date}
+                        {formatDate(log.date)}
                     </div>
                 </div>
                 <div class="log-content">

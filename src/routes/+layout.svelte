@@ -6,12 +6,11 @@
     <div class="header">
         <div class="conteneur-header">
             <a href="/" class="homelink" title="Revenir à l'accueil">
-                <img src="https://github.com/suspistew/blog-data-statics/blob/main/static/logo2.png?raw=true"/>
+                <img src="/static/logo3.png"/>
             </a>
-            <div style="margin-left:1rem;">
-                <div class="logo">Daron Quest</div>
-                <div class="accroche">Journal de bord d'un daron passionné par les jeux vidéo.</div>
-            </div>
+            <a href="/" class="homelink logotexte" title="Revenir à l'accueil" >
+                <img src="/static/logotexte.png"/>
+            </a>
         </div>
     </div>
     <main>
@@ -93,6 +92,10 @@
     .accroche {
       display: none;
     }
+
+    .logotexte img{
+      margin-top: 0.5rem;
+    }
   }
 
   .footer{
@@ -121,6 +124,12 @@
     height: 100%;
   }
 
+  .logotexte img{
+    margin-top: 0.7rem;
+    margin-left: 1.5rem;
+    height:70%
+  }
+
   @media (max-width: 1024px) {
     .conteneur-header {
       width: 100%;
@@ -133,6 +142,9 @@
     }
     .accroche {
       font-size: 0.9rem;
+    }
+    .logotexte img{
+      margin-top: 0.7rem;
     }
   }
 </style>

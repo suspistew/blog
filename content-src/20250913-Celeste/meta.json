@@ -1,0 +1,23 @@
+{
+  "title": "Celeste",
+  "description": "Le plateformer indépendant, pixel art magnifique et au gameplay presque parfait, qui m'a redonné goût au genre.",
+  "tags": ["Nintendo Switch"],
+  "date": "2025-09-13",
+  "miniature": "https://daronquest.fr/miniatures/celeste.jpg",
+  "full": "https://daronquest.fr/galleries/celeste/5.jpeg",
+  "gallery":[
+    "https://daronquest.fr/galleries/celeste/1.jpeg",
+    "https://daronquest.fr/galleries/celeste/2.jpeg",
+    "https://daronquest.fr/galleries/celeste/3.jpeg",
+    "https://daronquest.fr/galleries/celeste/4.jpeg",
+    "https://daronquest.fr/galleries/celeste/5.jpeg",
+    "https://daronquest.fr/galleries/celeste/6.jpeg",
+    "https://daronquest.fr/galleries/celeste/7.jpeg",
+    "https://daronquest.fr/galleries/celeste/8.jpeg",
+    "https://daronquest.fr/galleries/celeste/9.jpeg",
+    "https://daronquest.fr/galleries/celeste/10.jpeg",
+    "https://daronquest.fr/galleries/celeste/11.jpeg"
+  ],
+  "published": true,
+  "note": 9
+}

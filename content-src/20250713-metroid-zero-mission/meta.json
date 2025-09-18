@@ -1,0 +1,17 @@
+{
+  "title": "Metroid Zéro mission",
+  "description": "Remake du premier jeu métroid, cette fois sur GBA. Joué directement sur switch 2.",
+  "tags": ["Nintendo Switch 2"],
+  "date": "2025-07-13",
+  "miniature": "https://daronquest.fr/miniatures/metroid.jpg",
+  "full": "https://daronquest.fr/full-picture/metroid.jpg",
+  "gallery":[
+    "https://daronquest.fr/galleries/metroid-zero-mission/1.jpeg",
+    "https://daronquest.fr/galleries/metroid-zero-mission/2.jpeg",
+    "https://daronquest.fr/galleries/metroid-zero-mission/3.jpeg",
+    "https://daronquest.fr/galleries/metroid-zero-mission/4.jpeg",
+    "https://daronquest.fr/galleries/metroid-zero-mission/5.jpeg"
+  ],
+  "published": true,
+  "note": 8.5
+}

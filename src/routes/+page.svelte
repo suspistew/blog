@@ -1,13 +1,12 @@
 <script>
-
-    import axios from "axios";
-    import {onMount} from "svelte";
+    import { goto } from "$app/navigation";
     import RatingStars from "../components/RatingStars.svelte";
     import Loader from "../components/Loader.svelte";
-    import {afterNavigate, goto} from "$app/navigation";
 
-    let logs = [];
-    let mainlog = [];
+    export let data;                 // <-- new
+    let logs = data.logs;            // <-- from server
+    let mainlog = logs[0] ?? null;   // <-- first item
+
     let currentPageLogs = [];
     let currentPage = 0;
     let totalPages = 1;
@@ -22,44 +21,24 @@
         const params = new URLSearchParams(window.location.search);
         const p = parseInt(params.get("page"));
         const t = params.get("tag");
-        if (!isNaN(p) && p >= 1) {
-            currentPage = p - 1;
-        } else {
-            currentPage = 0;
-        }
-        if (t) {
-            currentTagFilter = t.replace(/\s+/g, '-').toLowerCase();
-        } else {
-            currentTagFilter = "";
-        }
+        currentPage = !isNaN(p) && p >= 1 ? p - 1 : 0;
+        currentTagFilter = t ? t.replace(/\s+/g, '-').toLowerCase() : "";
     }
 
-    async function searchLogs() {
-        return await axios
-            .get(`https://raw.githubusercontent.com/suspistew/blog-data/main/gaming/global_meta.json`)
-            .then(function ({data}) {
-                logs = data;
-                let tmpLogs = logs
-                    .filter((l, i) => i !== 0)
-                    .filter(l => !currentTagFilter || l.tags.some(t => t.replace(/\s+/g, '-').toLowerCase() === currentTagFilter));
-                currentPageLogs = tmpLogs.slice(
-                    currentPage * pageSize,
-                    (currentPage + 1) * pageSize
-                );
-                totalElements = tmpLogs.length;
-                totalPages = Math.ceil(tmpLogs.length / pageSize);
-                mainlog = logs[0];
-            });
+    function recompute() {
+        const tmp = logs
+            .filter((_, i) => i !== 0)
+            .filter(l => !currentTagFilter || l.tags.some(t => t.replace(/\s+/g,'-').toLowerCase() === currentTagFilter));
+        currentPageLogs = tmp.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+        totalElements = tmp.length;
+        totalPages = Math.ceil(tmp.length / pageSize) || 1;
     }
 
-    onMount(async () => {
-        initPageFromURL();
-        await searchLogs();
-    });
-    afterNavigate(async () => {
-        initPageFromURL();
-        await searchLogs();
-    })
+    // init client-side state from URL
+    import { onMount } from "svelte";
+    import { afterNavigate } from "$app/navigation";
+    onMount(() => { initPageFromURL(); recompute(); });
+    afterNavigate(() => { initPageFromURL(); recompute(); });
 
     function goToPage(page) {
         if (page >= 0 && page < Math.ceil(logs.length / pageSize)) {
@@ -68,59 +47,60 @@
                 const anchor = document.getElementById("anchor");
                 if (anchor) {
                     const y = anchor.getBoundingClientRect().top + window.scrollY;
-                    const headerHeight = 70;
-                    window.scrollTo({top: y - headerHeight, behavior: "smooth"});
+                    window.scrollTo({ top: y - 70, behavior: "smooth" });
                 }
             }, 1250);
             currentPage = page;
-            const url = new URL(window.location);
-            url.searchParams.set("page", page + 1);
             toPage(page + 1, currentTagFilter);
-            let tmpLogs = logs
-                .filter((l, i) => i !== 0)
-                .filter(l => !currentTagFilter || l.tags.some(t => t.replace(/\s+/g, '-').toLowerCase() === currentTagFilter));
-            currentPageLogs = tmpLogs.slice(
-                currentPage * pageSize,
-                (currentPage + 1) * pageSize
-            );
-            totalElements = tmpLogs.length;
-            totalPages = Math.ceil(tmpLogs.length / pageSize);
+            recompute();
         }
     }
 
     $: startPage = Math.max(currentPage - 3, 0);
     $: endPage = Math.min(currentPage + 3, totalPages - 1);
-    $: pages = Array.from(
-        {length: endPage - startPage + 1},
-        (_, i) => startPage + i
-    );
-
+    $: pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
 
     function selectTag(tag) {
         currentTagFilter = tag;
         currentPage = 0;
-        const url = new URL(window.location);
+        const url = new URL(window.location.href);
         url.searchParams.set("tag", currentTagFilter);
         url.searchParams.delete("page");
         window.history.pushState({}, "", url);
         goToPage(currentPage);
     }
-
     function resetFilter() {
         currentTagFilter = "";
         currentPage = 0;
-        const url = new URL(window.location);
+        const url = new URL(window.location.href);
         url.searchParams.delete("page");
         url.searchParams.delete("tag");
         window.history.pushState({}, "", url);
         goToPage(currentPage);
     }
 
+    function formatDate(s) {
+        const mois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+        const [y,m,d] = s.split("-").map(Number);
+        return `${d} ${mois[m-1]} ${y}`;
+    }
 </script>
+
 
 <svelte:head>
     <title>Daron Quest - Accueil</title>
     <meta name="description" content="Journal de bord d'un daron passionné"/>
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Daron Quest">
+    <meta property="og:title" content="Daron Quest — Journal de bord d’un daron">
+    <meta property="og:description" content="Journal de bord d’un daron passionné : avis et tests dans l'univers du gaming, manga, animés.">
+    <meta property="og:url" content="https://daronquest.fr">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Daron Quest — Journal de bord d’un daron">
+    <meta name="twitter:description" content="Journal de bord d’un daron passionné : avis et tests dans l'univers du gaming, manga, animés.">
 </svelte:head>
 
 <div class="home">
@@ -140,7 +120,7 @@
                         </div>
                         <div class="last-test-descr">
                             <div class="last-test-title">{mainlog.title}</div>
-                            <div class="last-test-description">{mainlog.description}</div>
+                            <div class="last-test-description">{@html mainlog.description}</div>
                             {#if mainlog.note}
                                 <div class="rating">
                                     <RatingStars value={mainlog.note} size={24}/>
@@ -247,7 +227,7 @@
                             <div class="article-title">
                                 <span>{m.title}</span>
                             </div>
-                            <div class="article-date">{m.date}</div>
+                            <div class="article-date">{formatDate(m.date)}</div>
                             <br/>
                             <div class="article-description">{@html m.description}</div>
 
@@ -280,7 +260,7 @@
                             <div class="article-title">
                                 <span>{m.title}</span>
                             </div>
-                            <div class="article-date">{m.date}</div>
+                            <div class="article-date">{formatDate(m.date)}</div>
                             <br/>
                             <div class="article-description">{@html m.description}</div>
 
